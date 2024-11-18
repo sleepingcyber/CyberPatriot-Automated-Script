@@ -33,7 +33,7 @@ $SecurityPolicy | Set-Content -Path $TempFilePath -Force
 
 #aplying updated policy
 Write-Output "applying updated policy"
-secedit /configure /db/ secedit.sdb /cfg $TempFilePath /log $LogFilePath /quiet
+secedit /configure /db/ secedit.sdb /cfg $TempFilePath /overwrite /log $LogFilePath /quiet
 
 
 
