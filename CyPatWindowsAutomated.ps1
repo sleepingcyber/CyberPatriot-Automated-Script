@@ -40,6 +40,12 @@ $CfgFileName = Read-Host "enter filename to save"
 $SecPool = Parse-SecPol -CfgFile $CfgFileName
 $SecPool.'System Access'.PasswordComplexity = 1
 $SecPool.'System Access'.MinimumPasswordLength = 8
-$SecPool.'System Access'.MaximumPasswordAge = 60
+$SecPool.'System Access'.MinimumPasswordAge = 5
+$SecPool.'System Access'.MaximumPasswordAge = 90
+$SecPool.'System Access'.PasswordHistorySize = 5
+$SecPool.'System Access'.ClearTextPassword = 0
+$SecPool.'System Access'.LockoutBadCount = 5
+
+
 
 Set-SecPol -Object $SecPool -CfgFile $CfgFileName
