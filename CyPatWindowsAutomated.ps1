@@ -53,7 +53,8 @@ $SecPool.'System Access'.AuditPrivilegeUse = 3
 $SecPool.'System Access'.AuditPolicyChange = 3
 $SecPool.'System Access'.AuditAccountManage = 2
 $SecPool.'System Access'.AuditAccountLogon = 3
-
+#privilege rights editing
+$SecPool.'Privilege Rights'.SeNetworkLogonRight = "*S-1-5-32-544,*S-1-5-11,*S-1-5-9, S-1-5-32-551"
 
 
 Set-SecPol -Object $SecPool -CfgFile $CfgFileName
