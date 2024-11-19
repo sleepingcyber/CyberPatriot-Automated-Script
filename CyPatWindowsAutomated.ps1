@@ -1,14 +1,4 @@
-#password policies reg path
-$PasswordPolicyPath = "HKLM:\SYSTEM\CurrentControlSet\Services\Netlogon\Parameters"
-$AccountPolicyPath = "HKLM:\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Winlogon"
 
-#password policies
-Set-ItemProperty -Path $PasswordPolicyPath -Name "PasswordHistorySize" -Value 5
-Set-ItemProperty -Path $PasswordPolicyPath -Name "MaximumPasswordAge" -Value 90
-Set-ItemProperty -Path $PasswordPolicyPath -Name "MinimumPasswordAge" -Value 10
-Set-ItemProperty -Path $PasswordPolicyPath -Name "MinimumPasswordLength" -Value 5
-Set-ItemProperty -Path $PasswordPolicyPath -Name "PasswordComplexity" -Value 1
-Set-ItemProperty -Path $PasswordPolicyPath -Name "ClearTextPassword" -Value 0
 
 #from:https://stackoverflow.com/questions/55774478/enforce-password-complexity-on-windows-using-powershell
 #ToDO: Implement this into script to make local sec policy changes
