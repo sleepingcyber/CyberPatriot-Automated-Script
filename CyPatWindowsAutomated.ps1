@@ -1,7 +1,6 @@
 
 
 #from:https://stackoverflow.com/questions/55774478/enforce-password-complexity-on-windows-using-powershell
-#ToDO: Implement this into script to make local sec policy changes
 #https://www.youtube.com/watch?v=iIIGhS3oAs0
 Function Parse-SecPol($CfgFile){ 
     secedit /export /cfg "$CfgFile" | out-null
