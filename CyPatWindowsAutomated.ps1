@@ -38,13 +38,22 @@ Function Set-SecPol($Object, $CfgFile){
 
 $CfgFileName = Read-Host "enter filename to save"
 $SecPool = Parse-SecPol -CfgFile $CfgFileName
+#Password Policy editing
 $SecPool.'System Access'.PasswordComplexity = 1
 $SecPool.'System Access'.MinimumPasswordLength = 8
 $SecPool.'System Access'.MinimumPasswordAge = 5
 $SecPool.'System Access'.MaximumPasswordAge = 90
 $SecPool.'System Access'.PasswordHistorySize = 5
 $SecPool.'System Access'.ClearTextPassword = 0
+#Account Lockout Policy editing
 $SecPool.'System Access'.LockoutBadCount = 5
+#Audit Policy editing
+$SecPool.'System Access'.AuditSystemEvents = 3
+$SecPool.'System Access'.AuditLogonEvents = 3
+$SecPool.'System Access'.AuditPrivilegeUse = 3
+$SecPool.'System Access'.AuditPolicyChange = 3
+$SecPool.'System Access'.AuditAccountManage = 2
+$SecPool.'System Access'.AuditAccountLogon = 3
 
 
 
