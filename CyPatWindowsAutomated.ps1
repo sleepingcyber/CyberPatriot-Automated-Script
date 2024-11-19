@@ -36,10 +36,10 @@ Function Set-SecPol($Object, $CfgFile){
     secedit /configure /db c:\windows\security\local.sdb /cfg "$CfgFile" /areas SECURITYPOLICY
 }
 
-
-$SecPool = Parse-SecPol -CfgFile C:\test\Test.cgf
+$CfgFileName = Read-Host "enter filename to save"
+$SecPool = Parse-SecPol -CfgFile $CfgFileName
 $SecPool.'System Access'.PasswordComplexity = 1
 $SecPool.'System Access'.MinimumPasswordLength = 8
 $SecPool.'System Access'.MaximumPasswordAge = 60
 
-Set-SecPol -Object $SecPool -CfgFile C:\Test\Test.cfg
+Set-SecPol -Object $SecPool -CfgFile $CfgFileName
