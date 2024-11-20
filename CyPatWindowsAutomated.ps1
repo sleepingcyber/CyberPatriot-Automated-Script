@@ -1,4 +1,12 @@
-#TODO: Disable weak services, enable auto updates, disable remote desktop, malwarebytes spot check, system integrity scan, enable firewall, check file and folder owner permissions
+<#TODO: 
+Disable weak services, 
+enable auto updates, 
+disable remote desktop, 
+malwarebytes spot check, 
+system integrity scan, 
+enable firewall, 
+check file and folder owner permissions
+#>
 
 #from:https://stackoverflow.com/questions/55774478/enforce-password-complexity-on-windows-using-powershell
 #https://www.youtube.com/watch?v=iIIGhS3oAs0
@@ -44,8 +52,10 @@ $SecPool.'System Access'.MinimumPasswordAge = 5
 $SecPool.'System Access'.MaximumPasswordAge = 90
 $SecPool.'System Access'.PasswordHistorySize = 5
 $SecPool.'System Access'.ClearTextPassword = 0
+Write-Output "Password Policies edited"
 #Account Lockout Policy editing
 $SecPool.'System Access'.LockoutBadCount = 5
+Write-Output "Account lockout policies edited"
 #Audit Policy editing
 $SecPool.'Event Audit'.AuditSystemEvents = 3
 $SecPool.'Event Audit'.AuditLogonEvents = 3
@@ -53,8 +63,9 @@ $SecPool.'Event Audit'.AuditPrivilegeUse = 3
 $SecPool.'Event Audit'.AuditPolicyChange = 3
 $SecPool.'Event Audit'.AuditAccountManage = 2
 $SecPool.'Event Audit'.AuditAccountLogon = 3
+Write-Output "Audit Policies Set"
 
-#privilege rights editing
+#users/privilege rights editing
 <#
 https://github.com/MicrosoftDocs/windowsserverdocs/blob/main/WindowsServerDocs/identity/ad-ds/manage/understand-security-identifiers.md
 SIDs that may be used and their corresponding account names:
@@ -156,6 +167,6 @@ $SecPool.'Privilege Rights'.SeShutdownPrivilege = "*S-1-5-32-544, *S-1-5-32-545,
 #$SecPool.'Privilege Rights'.SeSyncAgentPrivilege = ""
 # 2.2.49: 'Take ownership of files or other objects' set to 'Administrators'
 $SecPool.'Privilege Rights'.SeTakeOwnershipPrivilege = "*S-1-5-32-544"
-
+Write-Output "Users Rights Assignment edited"
 
 Set-SecPol -Object $SecPool -CfgFile $CfgFileName
