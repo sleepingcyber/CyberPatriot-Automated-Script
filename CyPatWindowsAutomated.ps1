@@ -117,6 +117,7 @@ $SecPool.'Privilege Rights'.SeDenyServiceLogonRight = "*S-1-5-32-546"
 $SecPool.'Privilege Rights'.SeDenyInteractiveLogonRight = "*S-1-5-32-546"
 # 2.2.26: 'Deny log on through Remote Desktop Services' set to 'Guests'
 $SecPool.'Privilege Rights'.SeDenyRemoteInteractiveLogonRight = "*S-1-5-32-546"
+
 # 2.2.29: 'Enable computer and user accounts to be trusted for delegation' set to 'No One'
 $SecPool.'Privilege Rights'.SeEnableDelegationPrivilege = "*S-1-5-32-544"
 # 2.2.30: 'Force shutdown from a remote system' set to 'Administrators'
@@ -125,19 +126,40 @@ $SecPool.'Privilege Rights'.SeRemoteShutdownPrivilege = "*S-1-5-32-544"
 $SecPool.'Privilege Rights'.SeAuditPrivilege = "*S-1-5-19,*S-1-5-20"
 # 2.2.33: 'Impersonate a client after authentication' (MS only) set to 'Administrators, LOCAL SERVICE, NETWORK SERVICE, SERVICE, IIS_IUSRS'
 $SecPool.'Privilege Rights'.SeImpersonatePrivilege = "*S-1-5-32-544,*S-1-5-19,*S-1-5-20,*S-1-5-6,*S-1-5-32-568"
-
 # 2.2.34: 'Increase scheduling priority' set to 'Administrators, Window Manager\Window Manager Group'
 $SecPool.'Privilege Rights'.SeIncreaseBasePriorityPrivilege = "*S-1-5-32-544,*S-1-5-90"
-
 # 2.2.35: 'Load and unload device drivers' set to 'Administrators'
 $SecPool.'Privilege Rights'.SeLoadDriverPrivilege = "*S-1-5-32-544"
-
 # 2.2.36: 'Lock pages in memory' set to 'No One'
 $SecPool.'Privilege Rights'.SeLockMemoryPrivilege = ""
-
 # 2.2.37: 'Log on as a batch job' set to 'Administrators'
 $SecPool.'Privilege Rights'.SeBatchLogonRight = "*S-1-5-32-544"
-
 # 2.2.38: 'Manage auditing and security log' set to 'Administrators' and (when applicable) 'Exchange Servers'
-$SecPool.'Privilege Rights'.SeSecurityPrivilege = "*S-1-5-32-544,*S-1-5-21-<DOMAIN>-<EXCHANGE-SERVER-SID>"
+$SecPool.'Privilege Rights'.SeSecurityPrivilege = "*S-1-5-32-544,"
+# 2.2.40: 'Modify an object label' set to 'No One'
+$SecPool.'Privilege Rights'.SeRelabelPrivilege = ""
+# 2.2.41: 'Modify firmware environment values' set to 'Administrators'
+$SecPool.'Privilege Rights'.SeSystemEnvironmentPrivilege = "*S-1-5-32-544"
+# 2.2.42: 'Perform volume maintenance tasks' set to 'Administrators'
+$SecPool.'Privilege Rights'.SeManageVolumePrivilege = "*S-1-5-32-544"
+# 2.2.43: 'Profile single process' set to 'Administrators'
+$SecPool.'Privilege Rights'.SeProfileSingleProcessPrivilege = "*S-1-5-32-544"
+# 2.2.44: 'Profile system performance' set to 'Administrators, NT SERVICE\WdiServiceHost'
+$SecPool.'Privilege Rights'.SeSystemProfilePrivilege = "*S-1-5-32-544,*S-1-5-80-3139157870-2983391045-3678747466-658725712-1809340420"
+# 2.2.45: 'Replace a process level token' set to 'LOCAL SERVICE, NETWORK SERVICE'
+$SecPool.'Privilege Rights'.SeAssignPrimaryTokenPrivilege = "*S-1-5-19,*S-1-5-20"
+
+# 2.2.46: 'Restore files and directories' set to 'Administrators'
+$SecPool.'Privilege Rights'.SeRestorePrivilege = "*S-1-5-32-544"
+
+# 2.2.47: 'Shut down the system' set to 'Administrators'
+$SecPool.'Privilege Rights'.SeShutdownPrivilege = "*S-1-5-32-544"
+
+# 2.2.48: 'Synchronize directory service data' set to 'No One' (DC only)
+$SecPool.'Privilege Rights'.SeSyncAgentPrivilege = ""
+
+# 2.2.49: 'Take ownership of files or other objects' set to 'Administrators'
+$SecPool.'Privilege Rights'.SeTakeOwnershipPrivilege = "*S-1-5-32-544"
+
+
 Set-SecPol -Object $SecPool -CfgFile $CfgFileName
