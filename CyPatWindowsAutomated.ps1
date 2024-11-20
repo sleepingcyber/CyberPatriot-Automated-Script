@@ -47,12 +47,12 @@ $SecPool.'System Access'.ClearTextPassword = 0
 #Account Lockout Policy editing
 $SecPool.'System Access'.LockoutBadCount = 5
 #Audit Policy editing
-$SecPool.'System Access'.AuditSystemEvents = 3
-$SecPool.'System Access'.AuditLogonEvents = 3
-$SecPool.'System Access'.AuditPrivilegeUse = 3
-$SecPool.'System Access'.AuditPolicyChange = 3
-$SecPool.'System Access'.AuditAccountManage = 2
-$SecPool.'System Access'.AuditAccountLogon = 3
+$SecPool.'Event Audit'.AuditSystemEvents = 3
+$SecPool.'Event Audit'.AuditLogonEvents = 3
+$SecPool.'Event Audit'.AuditPrivilegeUse = 3
+$SecPool.'Event Audit'.AuditPolicyChange = 3
+$SecPool.'Event Audit'.AuditAccountManage = 2
+$SecPool.'Event Audit'.AuditAccountLogon = 3
 
 #privilege rights editing
 <#
