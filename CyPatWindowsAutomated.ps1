@@ -75,9 +75,9 @@ S-1-5-32-555: Builtin\Remote Desktop Users
 # 2.2.2: 'Access this computer from the network' to 'Administrators, Authenticated Users, ENTERPRISE DOMAIN CONTROLLERS'
 $SecPool.'Privilege Rights'.SeNetworkLogonRight = "*S-1-5-32-544,*S-1-5-11,*S-1-5-9, S-1-5-32-551"
 # 2.2.3: 'Act as part of the operating system' set to 'No One'
-$SecPool.'Privilege Rights'.SeTcbPrivilege = ""
+#$SecPool.'Privilege Rights'.SeTcbPrivilege = ""
 # 2.2.4: 'Add workstations to domain' set to 'Administrators'
-$SecPool.'Privilege Rights'.SeMachineAccountPrivilege = "*S-1-5-32-544"
+#$SecPool.'Privilege Rights'.SeMachineAccountPrivilege = "*S-1-5-32-544"
 # 2.2.6: 'Adjust memory quotas for a process' set to 'Administrators, LOCAL SERVICE, NETWORK SERVICE'
 $SecPool.'Privilege Rights'.SeIncreaseQuotaPrivilege = "*S-1-5-32-544,*S-1-5-19,*S-1-5-20"
 # 2.2.7: 'Allow log on locally' set to 'Administrators, ENTERPRISE DOMAIN CONTROLLERS, & USERS-(only for desktop windows, not server)'
@@ -101,25 +101,25 @@ $SecPool.'Privilege Rights'.SeCreateGlobalPrivilege = "*S-1-5-32-544, *S-1-5-19,
 # 2.2.18: 'Create symbolic links' set to 'Administrators'
 $SecPool.'Privilege Rights'.SeCreateSymbolicLinkPrivilege = "*S-1-5-32-544"
 # 2.2.20 (L1) Ensure 'Debug programs' is set to 'Administrators'
-$SecPool.'Privilege Right'.SeDebugPrivilege = "S-1-5-32-544"
+#$SecPool.'Privilege Right'.SeDebugPrivilege = "S-1-5-32-544"
 
 #MAKE SURE THE DENY LOGON RIGHTS SETTINGS DO NOT AFFECT ANYBODY THAT NEEDS THESE RIGHTS AS DEFINED IN THE README
 
 #2.2.21 (L1) Ensure 'Deny access to this computer from the network' to include 'Guests'
-$SecPool.'Privilege Right'.SeDenyNetworkLogonRight = "*S-1-5-32-546"
+#$SecPool.'Privilege Right'.SeDenyNetworkLogonRight = "*S-1-5-32-546"
 # 2.2.22: 'Deny access to this computer from the network' set to 'Guests, Local account and member of Administrators group'
-$SecPool.'Privilege Rights'.SeDenyNetworkLogonRight = "*S-1-5-32-546,*S-1-5-113"
+$SecPool.'Privilege Rights'.SeDenyNetworkLogonRight = "*S-1-5-32-546"
 # 2.2.23: 'Deny log on as a batch job' set to 'Guests'
-$SecPool.'Privilege Rights'.SeDenyBatchLogonRight = "*S-1-5-32-546"
+#$SecPool.'Privilege Rights'.SeDenyBatchLogonRight = "*S-1-5-32-546"
 # 2.2.24: 'Deny log on as a service' set to 'Guests'
-$SecPool.'Privilege Rights'.SeDenyServiceLogonRight = "*S-1-5-32-546"
+#$SecPool.'Privilege Rights'.SeDenyServiceLogonRight = "*S-1-5-32-546"
 # 2.2.25: 'Deny log on locally' set to 'Guests'
 $SecPool.'Privilege Rights'.SeDenyInteractiveLogonRight = "*S-1-5-32-546"
 # 2.2.26: 'Deny log on through Remote Desktop Services' set to 'Guests'
-$SecPool.'Privilege Rights'.SeDenyRemoteInteractiveLogonRight = "*S-1-5-32-546"
+#$SecPool.'Privilege Rights'.SeDenyRemoteInteractiveLogonRight = "*S-1-5-32-546"
 
 # 2.2.29: 'Enable computer and user accounts to be trusted for delegation' set to 'No One'
-$SecPool.'Privilege Rights'.SeEnableDelegationPrivilege = "*S-1-5-32-544"
+#$SecPool.'Privilege Rights'.SeEnableDelegationPrivilege = "*S-1-5-32-544"
 # 2.2.30: 'Force shutdown from a remote system' set to 'Administrators'
 $SecPool.'Privilege Rights'.SeRemoteShutdownPrivilege = "*S-1-5-32-544"
 # 2.2.31: 'Generate security audits' set to 'LOCAL SERVICE, NETWORK SERVICE'
@@ -131,13 +131,13 @@ $SecPool.'Privilege Rights'.SeIncreaseBasePriorityPrivilege = "*S-1-5-32-544,*S-
 # 2.2.35: 'Load and unload device drivers' set to 'Administrators'
 $SecPool.'Privilege Rights'.SeLoadDriverPrivilege = "*S-1-5-32-544"
 # 2.2.36: 'Lock pages in memory' set to 'No One'
-$SecPool.'Privilege Rights'.SeLockMemoryPrivilege = ""
+#$SecPool.'Privilege Rights'.SeLockMemoryPrivilege = ""
 # 2.2.37: 'Log on as a batch job' set to 'Administrators'
 $SecPool.'Privilege Rights'.SeBatchLogonRight = "*S-1-5-32-544"
 # 2.2.38: 'Manage auditing and security log' set to 'Administrators' and (when applicable) 'Exchange Servers'
 $SecPool.'Privilege Rights'.SeSecurityPrivilege = "*S-1-5-32-544,"
 # 2.2.40: 'Modify an object label' set to 'No One'
-$SecPool.'Privilege Rights'.SeRelabelPrivilege = ""
+#$SecPool.'Privilege Rights'.SeRelabelPrivilege = ""
 # 2.2.41: 'Modify firmware environment values' set to 'Administrators'
 $SecPool.'Privilege Rights'.SeSystemEnvironmentPrivilege = "*S-1-5-32-544"
 # 2.2.42: 'Perform volume maintenance tasks' set to 'Administrators'
@@ -153,7 +153,7 @@ $SecPool.'Privilege Rights'.SeRestorePrivilege = "*S-1-5-32-544,*S-1-5-32-551"
 # 2.2.47: 'Shut down the system' set to 'Administrators'
 $SecPool.'Privilege Rights'.SeShutdownPrivilege = "*S-1-5-32-544, *S-1-5-32-545, *S-1-5-32-551"
 # 2.2.48: 'Synchronize directory service data' set to 'No One' (DC only)
-$SecPool.'Privilege Rights'.SeSyncAgentPrivilege = ""
+#$SecPool.'Privilege Rights'.SeSyncAgentPrivilege = ""
 # 2.2.49: 'Take ownership of files or other objects' set to 'Administrators'
 $SecPool.'Privilege Rights'.SeTakeOwnershipPrivilege = "*S-1-5-32-544"
 
