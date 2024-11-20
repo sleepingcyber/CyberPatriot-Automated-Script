@@ -148,16 +148,12 @@ $SecPool.'Privilege Rights'.SeProfileSingleProcessPrivilege = "*S-1-5-32-544"
 $SecPool.'Privilege Rights'.SeSystemProfilePrivilege = "*S-1-5-32-544,*S-1-5-80-3139157870-2983391045-3678747466-658725712-1809340420"
 # 2.2.45: 'Replace a process level token' set to 'LOCAL SERVICE, NETWORK SERVICE'
 $SecPool.'Privilege Rights'.SeAssignPrimaryTokenPrivilege = "*S-1-5-19,*S-1-5-20"
-
 # 2.2.46: 'Restore files and directories' set to 'Administrators'
-$SecPool.'Privilege Rights'.SeRestorePrivilege = "*S-1-5-32-544"
-
+$SecPool.'Privilege Rights'.SeRestorePrivilege = "*S-1-5-32-544,*S-1-5-32-551"
 # 2.2.47: 'Shut down the system' set to 'Administrators'
-$SecPool.'Privilege Rights'.SeShutdownPrivilege = "*S-1-5-32-544"
-
+$SecPool.'Privilege Rights'.SeShutdownPrivilege = "*S-1-5-32-544, *S-1-5-32-545, *S-1-5-32-551"
 # 2.2.48: 'Synchronize directory service data' set to 'No One' (DC only)
 $SecPool.'Privilege Rights'.SeSyncAgentPrivilege = ""
-
 # 2.2.49: 'Take ownership of files or other objects' set to 'Administrators'
 $SecPool.'Privilege Rights'.SeTakeOwnershipPrivilege = "*S-1-5-32-544"
 
