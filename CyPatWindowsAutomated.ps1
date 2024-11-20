@@ -55,6 +55,22 @@ $SecPool.'System Access'.AuditAccountManage = 2
 $SecPool.'System Access'.AuditAccountLogon = 3
 
 #privilege rights editing
+<#
+https://github.com/MicrosoftDocs/windowsserverdocs/blob/main/WindowsServerDocs/identity/ad-ds/manage/understand-security-identifiers.md
+SIDs that may be used and their corresponding account names:
+S-1-5-113: Local account
+S-1-5-6: Service
+S-1-5-9: Enterprise Domain Controllers
+S-1-5-11:Authenticated Users
+S-1-5-19: NT Authority (LocalService)
+S-1-5-20: Network Service
+S-1-5-32-544: Administrators
+S-1-5-32-545: Users
+S-1-5-32-546: Guests
+S-1-5-32-551: Backup Operators
+S-1-5-32-555: Builtin\Remote Desktop Users
+#>
+
 # 2.2.2: 'Access this computer from the network' to 'Administrators, Authenticated Users, ENTERPRISE DOMAIN CONTROLLERS'
 $SecPool.'Privilege Rights'.SeNetworkLogonRight = "*S-1-5-32-544,*S-1-5-11,*S-1-5-9, S-1-5-32-551"
 # 2.2.3: 'Act as part of the operating system' set to 'No One'
@@ -63,8 +79,8 @@ $SecPool.'Privilege Rights'.SeTcbPrivilege = ""
 $SecPool.'Privilege Rights'.SeMachineAccountPrivilege = "*S-1-5-32-544"
 # 2.2.6: 'Adjust memory quotas for a process' set to 'Administrators, LOCAL SERVICE, NETWORK SERVICE'
 $SecPool.'Privilege Rights'.SeIncreaseQuotaPrivilege = "*S-1-5-32-544,*S-1-5-19,*S-1-5-20"
-# 2.2.7: 'Allow log on locally' set to 'Administrators, ENTERPRISE DOMAIN CONTROLLERS'
-$SecPool.'Privilege Rights'.SeInteractiveLogonRight = "*S-1-5-32-544,*S-1-5-9, *S-1-5-32-545, *S-1-5-32-551"
+# 2.2.7: 'Allow log on locally' set to 'Administrators, ENTERPRISE DOMAIN CONTROLLERS, & USERS-(only for desktop windows, not server)'
+$SecPool.'Privilege Rights'.SeInteractiveLogonRight = "*S-1-5-9, *S-1-5-32-544,*S-1-5-32-545, *S-1-5-32-551"
 # 2.2.8: 'Allow log on through Remote Desktop Services' set to 'Administrators'
 $SecPool.'Privilege Rights'.SeRemoteInteractiveLogonRight = "*S-1-5-32-544, *S-1-5-32-555"
 #2.2.11: Ensure 'Back up files and directories' is set to 'Administrators'
@@ -85,21 +101,48 @@ $SecPool.'Privilege Rights'.SeCreateGlobalPrivilege = "*S-1-5-32-544, *S-1-5-19,
 $SecPool.'Privilege Rights'.SeCreateSymbolicLinkPrivilege = "*S-1-5-32-544"
 # 2.2.20 (L1) Ensure 'Debug programs' is set to 'Administrators'
 $SecPool.'Privilege Right'.SeDebugPrivilege = "S-1-5-32-544"
+
+#MAKE SURE THE DENY LOGON RIGHTS SETTINGS DO NOT AFFECT ANYBODY THAT NEEDS THESE RIGHTS AS DEFINED IN THE README
+
 #2.2.21 (L1) Ensure 'Deny access to this computer from the network' to include 'Guests'
-$SecPool.'Privilege Right'.SeDenyNetworkLogonRight = "Guest"
+$SecPool.'Privilege Right'.SeDenyNetworkLogonRight = "*S-1-5-32-546"
 # 2.2.22: 'Deny access to this computer from the network' set to 'Guests, Local account and member of Administrators group'
 $SecPool.'Privilege Rights'.SeDenyNetworkLogonRight = "*S-1-5-32-546,*S-1-5-113"
-
 # 2.2.23: 'Deny log on as a batch job' set to 'Guests'
 $SecPool.'Privilege Rights'.SeDenyBatchLogonRight = "*S-1-5-32-546"
-
 # 2.2.24: 'Deny log on as a service' set to 'Guests'
 $SecPool.'Privilege Rights'.SeDenyServiceLogonRight = "*S-1-5-32-546"
-
 # 2.2.25: 'Deny log on locally' set to 'Guests'
 $SecPool.'Privilege Rights'.SeDenyInteractiveLogonRight = "*S-1-5-32-546"
-
 # 2.2.26: 'Deny log on through Remote Desktop Services' set to 'Guests'
 $SecPool.'Privilege Rights'.SeDenyRemoteInteractiveLogonRight = "*S-1-5-32-546"
+# 2.2.29: 'Enable computer and user accounts to be trusted for delegation' set to 'No One'
+$SecPool.'Privilege Rights'.SeEnableDelegationPrivilege = "*S-1-5-32-544"
 
+# 2.2.30: 'Force shutdown from a remote system' set to 'Administrators'
+$SecPool.'Privilege Rights'.SeRemoteShutdownPrivilege = "*S-1-5-32-544"
+
+# 2.2.31: 'Generate security audits' set to 'LOCAL SERVICE, NETWORK SERVICE'
+$SecPool.'Privilege Rights'.SeAuditPrivilege = "*S-1-5-19,*S-1-5-20"
+
+# 2.2.32: 'Impersonate a client after authentication' (DC only) set to 'Administrators, LOCAL SERVICE, NETWORK SERVICE, SERVICE'
+$SecPool.'Privilege Rights'.SeImpersonatePrivilege = "*S-1-5-32-544,*S-1-5-19,*S-1-5-20,*S-1-5-6"
+
+# 2.2.33: 'Impersonate a client after authentication' (MS only) set to 'Administrators, LOCAL SERVICE, NETWORK SERVICE, SERVICE, IIS_IUSRS'
+$SecPool.'Privilege Rights'.SeImpersonatePrivilege = "*S-1-5-32-544,*S-1-5-19,*S-1-5-20,*S-1-5-6,*S-1-5-32-568"
+
+# 2.2.34: 'Increase scheduling priority' set to 'Administrators, Window Manager\Window Manager Group'
+$SecPool.'Privilege Rights'.SeIncreaseBasePriorityPrivilege = "*S-1-5-32-544,*S-1-5-90"
+
+# 2.2.35: 'Load and unload device drivers' set to 'Administrators'
+$SecPool.'Privilege Rights'.SeLoadDriverPrivilege = "*S-1-5-32-544"
+
+# 2.2.36: 'Lock pages in memory' set to 'No One'
+$SecPool.'Privilege Rights'.SeLockMemoryPrivilege = ""
+
+# 2.2.37: 'Log on as a batch job' set to 'Administrators'
+$SecPool.'Privilege Rights'.SeBatchLogonRight = "*S-1-5-32-544"
+
+# 2.2.38: 'Manage auditing and security log' set to 'Administrators' and (when applicable) 'Exchange Servers'
+$SecPool.'Privilege Rights'.SeSecurityPrivilege = "*S-1-5-32-544,*S-1-5-21-<DOMAIN>-<EXCHANGE-SERVER-SID>"
 Set-SecPol -Object $SecPool -CfgFile $CfgFileName
