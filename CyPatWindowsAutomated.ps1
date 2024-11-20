@@ -1,3 +1,5 @@
+#TODO: Disable weak services, enable auto updates, disable remote desktop, malwarebytes spot check, system integrity scan
+
 #from:https://stackoverflow.com/questions/55774478/enforce-password-complexity-on-windows-using-powershell
 #https://www.youtube.com/watch?v=iIIGhS3oAs0
 Function Parse-SecPol($CfgFile){ 
