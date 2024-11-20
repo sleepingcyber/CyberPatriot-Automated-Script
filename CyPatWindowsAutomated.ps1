@@ -64,6 +64,7 @@ S-1-5-9: Enterprise Domain Controllers
 S-1-5-11:Authenticated Users
 S-1-5-19: NT Authority (LocalService)
 S-1-5-20: Network Service
+S-1-5-90: Windows Manager\Windows Manager Group
 S-1-5-32-544: Administrators
 S-1-5-32-545: Users
 S-1-5-32-546: Guests
@@ -118,16 +119,10 @@ $SecPool.'Privilege Rights'.SeDenyInteractiveLogonRight = "*S-1-5-32-546"
 $SecPool.'Privilege Rights'.SeDenyRemoteInteractiveLogonRight = "*S-1-5-32-546"
 # 2.2.29: 'Enable computer and user accounts to be trusted for delegation' set to 'No One'
 $SecPool.'Privilege Rights'.SeEnableDelegationPrivilege = "*S-1-5-32-544"
-
 # 2.2.30: 'Force shutdown from a remote system' set to 'Administrators'
 $SecPool.'Privilege Rights'.SeRemoteShutdownPrivilege = "*S-1-5-32-544"
-
 # 2.2.31: 'Generate security audits' set to 'LOCAL SERVICE, NETWORK SERVICE'
 $SecPool.'Privilege Rights'.SeAuditPrivilege = "*S-1-5-19,*S-1-5-20"
-
-# 2.2.32: 'Impersonate a client after authentication' (DC only) set to 'Administrators, LOCAL SERVICE, NETWORK SERVICE, SERVICE'
-$SecPool.'Privilege Rights'.SeImpersonatePrivilege = "*S-1-5-32-544,*S-1-5-19,*S-1-5-20,*S-1-5-6"
-
 # 2.2.33: 'Impersonate a client after authentication' (MS only) set to 'Administrators, LOCAL SERVICE, NETWORK SERVICE, SERVICE, IIS_IUSRS'
 $SecPool.'Privilege Rights'.SeImpersonatePrivilege = "*S-1-5-32-544,*S-1-5-19,*S-1-5-20,*S-1-5-6,*S-1-5-32-568"
 
