@@ -170,6 +170,8 @@ $SecPool.'Privilege Rights'.SeTakeOwnershipPrivilege = "*S-1-5-32-544"
 Write-Output "Users Rights Assignment edited"
 
 Set-SecPol -Object $SecPool -CfgFile $CfgFileName
+
+#Security options editing
 # Function to apply registry settings
 function Set-RegistryValue {
     param (
@@ -310,7 +312,141 @@ $Settings = @(
         KeyPath = "HKLM:\SYSTEM\CurrentControlSet\Services\LanmanServer\Parameters";
         Name = "AutoDisconnect"; # Microsoft network server: Amount of idle time required before suspending session
         Value = 15
+    },
+    <#
+    @{
+        KeyPath = "HKLM:\SYSTEM\CurrentControlSet\Services\LanmanServer\Parameters";
+        Name = "EnableForcedLogOff"; # Microsoft network server: Disconnect clients when logon hours expire
+        Value = 1
+    },
+#>
+    @{
+        KeyPath = "HKLM:\SYSTEM\CurrentControlSet\Services\LanmanServer\Parameters";
+        Name = "SmbServerNameValidation"; # Microsoft network server: Server SPN target name validation level
+        Value = 1 # Accept if provided by client
+    },
+    @{
+        KeyPath = "HKLM:\SYSTEM\CurrentControlSet\Control\Lsa";
+        Name = "AllowAnonymousSidNameTranslation"; # Network access: Allow anonymous SID/Name translation
+        Value = 0 # Disabled
+    },
+    @{
+        KeyPath = "HKLM:\SYSTEM\CurrentControlSet\Control\Lsa";
+        Name = "RestrictAnonymousSAM"; # Network access: Do not allow anonymous enumeration of SAM accounts
+        Value = 1
+    },
+    @{
+        KeyPath = "HKLM:\SYSTEM\CurrentControlSet\Control\Lsa";
+        Name = "RestrictAnonymous"; # Network access: Do not allow anonymous enumeration of SAM accounts and shares
+        Value = 1
+    },
+    @{
+        KeyPath = "HKLM:\SYSTEM\CurrentControlSet\Control\Lsa";
+        Name = "DisableDomainCreds"; # Network access: Do not allow storage of passwords and credentials for network authentication
+        Value = 1
+    },
+    @{
+        KeyPath = "HKLM:\SYSTEM\CurrentControlSet\Control\Lsa";
+        Name = "EveryoneIncludesAnonymous"; # Network access: Let Everyone permissions apply to anonymous users
+        Value = 0 # Disabled
+    },
+    <#
+    @{
+        KeyPath = "HKLM:\SYSTEM\CurrentControlSet\Control\Lsa";
+        Name = "ForceLogoffWhenHourExpire"; # Network security: Force logoff when logon hours expire
+        Value = 1
+    },
+    #>
+    @{
+        KeyPath = "HKLM:\SYSTEM\CurrentControlSet\Control\Lsa";
+        Name = "LmCompatibilityLevel"; # Network security: LAN Manager authentication level
+        Value = 5 # Send NTLMv2 response only. Refuse LM & NTLM
+    },
+    @{
+        KeyPath = "HKLM:\SYSTEM\CurrentControlSet\Control\Lsa";
+        Name = "AllowLocalSystemToUseComputerIdentityForNTLM"; # Network security: Allow Local System to use computer identity for NTLM
+        Value = 1 # Enabled
+    },
+    @{
+        KeyPath = "HKLM:\SYSTEM\CurrentControlSet\Control\Lsa";
+        Name = "LocalSystemNullSessionFallback"; # Network security: Allow LocalSystem NULL session fallback
+        Value = 0 # Disabled
+    },
+    @{
+        KeyPath = "HKLM:\SYSTEM\CurrentControlSet\Control\Lsa";
+        Name = "AllowPKU2UAuthentication"; # Network Security: Allow PKU2U authentication requests to use online identities
+        Value = 0 # Disabled
+    },
+    @{
+        KeyPath = "HKLM:\SYSTEM\CurrentControlSet\Control\Lsa";
+        Name = "KerberosEncryptionTypes"; # Network security: Configure encryption types allowed for Kerberos
+        Value = "AES128_HMAC_SHA1, AES256_HMAC_SHA1, Future encryption types"
+    },
+    @{
+        KeyPath = "HKLM:\SYSTEM\CurrentControlSet\Control\Lsa";
+        Name = "DoNotStoreLANManagerHash"; # Network security: Do not store LAN Manager hash value on next password change
+        Value = 1 # Enabled
+    }, @{
+        KeyPath = "HKLM:\SYSTEM\CurrentControlSet\Control\Lsa";
+        Name = "LDAPClientSigningRequirements"; # Network security: LDAP client signing requirements
+        Value = 1 # Negotiate signing
+    },
+    @{
+        KeyPath = "HKLM:\SYSTEM\CurrentControlSet\Control\Lsa";
+        Name = "MinimumSessionSecurityNTLMSSPClients"; # Network security: Minimum session security for NTLM SSP clients
+        Value = "Require NTLMv2 session security, Require 128-bit encryption"
+    },
+    @{
+        KeyPath = "HKLM:\SYSTEM\CurrentControlSet\Control\Lsa";
+        Name = "MinimumSessionSecurityNTLMSSPServers"; # Network security: Minimum session security for NTLM SSP servers
+        Value = "Require NTLMv2 session security, Require 128-bit encryption"
+    },
+    @{
+        KeyPath = "HKLM:\SYSTEM\CurrentControlSet\Control\Lsa";
+        Name = "RestrictNTLMAuditIncomingNTLM"; # Network security: Restrict NTLM: Audit Incoming NTLM Traffic
+        Value = 1 # Enable auditing for all accounts
+    },
+    @{
+        KeyPath = "HKLM:\SYSTEM\CurrentControlSet\Control\Lsa";
+        Name = "RestrictNTLMAuditNTLMAuthentication"; # Network security: Restrict NTLM: Audit NTLM authentication in this domain
+        Value = 2 # Enable all (DC only)
+    },
+    @{
+        KeyPath = "HKLM:\SYSTEM\CurrentControlSet\Control\Lsa";
+        Name = "RestrictNTLMAuditOutgoingNTLM"; # Network security: Restrict NTLM: Outgoing NTLM traffic to remote servers
+        Value = 2 # Audit all or higher
+    },
+    @{
+        KeyPath = "HKLM:\SYSTEM\CurrentControlSet\Control\Lsa";
+        Name = "LDAPClientSigningRequirements"; # Network security: LDAP client signing requirements
+        Value = 1 # Negotiate signing
+    },
+    @{
+        KeyPath = "HKLM:\SYSTEM\CurrentControlSet\Control\Lsa";
+        Name = "MinimumSessionSecurityNTLMSSPClients"; # Network security: Minimum session security for NTLM SSP clients
+        Value = "Require NTLMv2 session security, Require 128-bit encryption"
+    },
+    @{
+        KeyPath = "HKLM:\SYSTEM\CurrentControlSet\Control\Lsa";
+        Name = "MinimumSessionSecurityNTLMSSPServers"; # Network security: Minimum session security for NTLM SSP servers
+        Value = "Require NTLMv2 session security, Require 128-bit encryption"
+    },
+    @{
+        KeyPath = "HKLM:\SYSTEM\CurrentControlSet\Control\Lsa";
+        Name = "RestrictNTLMAuditIncomingNTLM"; # Network security: Restrict NTLM: Audit Incoming NTLM Traffic
+        Value = 1 # Enable auditing for all accounts
+    },
+    @{
+        KeyPath = "HKLM:\SYSTEM\CurrentControlSet\Control\Lsa";
+        Name = "RestrictNTLMAuditNTLMAuthentication"; # Network security: Restrict NTLM: Audit NTLM authentication in this domain
+        Value = 2 # Enable all (DC only)
+    },
+    @{
+        KeyPath = "HKLM:\SYSTEM\CurrentControlSet\Control\Lsa";
+        Name = "RestrictNTLMAuditOutgoingNTLM"; # Network security: Restrict NTLM: Outgoing NTLM traffic to remote servers
+        Value = 2 # Audit all or higher
     }
+
 )
 
 
@@ -320,5 +456,5 @@ foreach ($Setting in $Settings) {
 }
 
 # Confirm changes
-Write-Output "All settings applied successfully!"
+Write-Output "All Security Options applied successfully!"
 
