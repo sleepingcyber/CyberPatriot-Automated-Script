@@ -170,3 +170,69 @@ $SecPool.'Privilege Rights'.SeTakeOwnershipPrivilege = "*S-1-5-32-544"
 Write-Output "Users Rights Assignment edited"
 
 Set-SecPol -Object $SecPool -CfgFile $CfgFileName
+# Function to apply registry settings
+function Set-RegistryValue {
+    param (
+        [string]$KeyPath,
+        [string]$Name,
+        [int]$Value
+    )
+    if (-not (Test-Path $KeyPath)) {
+        New-Item -Path $KeyPath -Force | Out-Null
+    }
+    Set-ItemProperty -Path $KeyPath -Name $Name -Value $Value -Force
+    Write-Host "Set $Name at $KeyPath to $Value"
+}
+
+# Settings Definitions
+$Settings = @(
+    @{
+        KeyPath = "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System";
+        Name = "NoConnectedUser"; # Accounts: Block Microsoft accounts
+        Value = 3
+    },
+    @{
+        KeyPath = "HKLM:\SYSTEM\CurrentControlSet\Services\LanManServer\Parameters";
+        Name = "RestrictNullSessAccess"; # Accounts: Guest account status
+        Value = 1
+    },
+    @{
+        KeyPath = "HKLM:\System\CurrentControlSet\Control\Lsa";
+        Name = "LimitBlankPasswordUse"; # Accounts: Limit local account use of blank passwords
+        Value = 1
+    },
+    @{
+        KeyPath = "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System";
+        Name = "AdministratorName"; # Accounts: Rename administrator account
+        Value = 12 # Example name
+    },
+    @{
+        KeyPath = "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System";
+        Name = "GuestName"; # Accounts: Rename guest account
+        Value = 13 # Example name
+    },
+    @{
+        KeyPath = "HKLM:\System\CurrentControlSet\Control\Lsa";
+        Name = "AuditBaseObjects"; # Audit: Force audit policy subcategory settings
+        Value = 1
+    },
+    @{
+        KeyPath = "HKLM:\System\CurrentControlSet\Services\EventLog\Security";
+        Name = "CrashOnAuditFail"; # Audit: Shut down system immediately if unable to log security audits
+        Value = 0
+    },
+    @{
+        KeyPath = "HKLM:\SOFTWARE\Policies\Microsoft\Windows NT\Printers";
+        Name = "PreventUserInstall"; # Devices: Prevent users from installing printer drivers
+        Value = 1
+    }
+)
+
+# Apply Settings
+foreach ($Setting in $Settings) {
+    Set-RegistryValue -KeyPath $Setting.KeyPath -Name $Setting.Name -Value $Setting.Value
+}
+
+# Confirm changes
+Write-Output "All settings applied successfully!"
+
