@@ -419,6 +419,61 @@ $Settings = @(
         KeyPath = "HKLM:\SYSTEM\CurrentControlSet\Control\Lsa";
         Name = "RestrictNTLMAuditOutgoingNTLM"; # Network security: Restrict NTLM: Outgoing NTLM traffic to remote servers
         Value = 2 # Audit all or higher
+    },
+    @{
+        KeyPath = "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System";
+        Name = "ShutdownWithoutLogon"; # Shutdown: Allow system to be shut down without having to log on
+        Value = 0 # Disabled
+    },
+    @{
+        KeyPath = "HKLM:\SYSTEM\CurrentControlSet\Control\Session Manager";
+        Name = "ObCaseInsensitive"; # System objects: Require case insensitivity for non-Windows subsystems
+        Value = 1 # Enabled
+    },
+    @{
+        KeyPath = "HKLM:\SYSTEM\CurrentControlSet\Control\Session Manager";
+        Name = "ProtectionMode"; # System objects: Strengthen default permissions of internal system objects
+        Value = 1 # Enabled
+    },
+    @{
+        KeyPath = "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System";
+        Name = "FilterAdministratorToken"; # User Account Control: Admin Approval Mode for the Built-in Administrator account
+        Value = 1 # Enabled
+    },
+    @{
+        KeyPath = "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System";
+        Name = "ConsentPromptBehaviorAdmin"; # User Account Control: Behavior of the elevation prompt for administrators
+        Value = 2 # Prompt for consent on the secure desktop
+    },
+    @{
+        KeyPath = "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System";
+        Name = "ConsentPromptBehaviorUser"; # User Account Control: Behavior of the elevation prompt for standard users
+        Value = 0 # Automatically deny elevation requests
+    },
+    @{
+        KeyPath = "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System";
+        Name = "EnableInstallerDetection"; # User Account Control: Detect application installations and prompt for elevation
+        Value = 1 # Enabled
+    },
+    @{
+        KeyPath = "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System";
+        Name = "EnableSecureUIAPaths"; # User Account Control: Only elevate UIAccess applications installed in secure locations
+        Value = 1 # Enabled
+    },
+    @{
+        KeyPath = "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System";
+        Name = "EnableLUA"; # User Account Control: Run all administrators in Admin Approval Mode
+        Value = 1 # Enabled
+    },
+    @{
+        KeyPath = "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System";
+        Name = "PromptOnSecureDesktop"; # User Account Control: Switch to the secure desktop when prompting for elevation
+        Value = 1 # Enabled
+    },
+    @{
+        KeyPath = "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System";
+        Name = "EnableVirtualization"; # User Account Control: Virtualize file and registry write failures
+        Value = 1 # Enabled
     }
 
 )
