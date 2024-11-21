@@ -225,8 +225,94 @@ $Settings = @(
         KeyPath = "HKLM:\SOFTWARE\Policies\Microsoft\Windows NT\Printers";
         Name = "PreventUserInstall"; # Devices: Prevent users from installing printer drivers
         Value = 1
+    },
+    @{
+        KeyPath = "HKLM:\SYSTEM\CurrentControlSet\Services\Netlogon\Parameters";
+        Name = "RequireStrongKey"; # Domain Member: Require strong session key
+        Value = 1
+    },
+    @{
+        KeyPath = "HKLM:\SYSTEM\CurrentControlSet\Services\Netlogon\Parameters";
+        Name = "SealSecureChannel"; # Domain Member: Digitally encrypt or sign secure channel data (always)
+        Value = 1
+    },
+    @{
+        KeyPath = "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System";
+        Name = "DisableCAD"; # Interactive logon: Do not require CTRL+ALT+DEL
+        Value = 0
+    },
+    @{
+        KeyPath = "HKLM:\SYSTEM\CurrentControlSet\Services\LanmanWorkstation\Parameters";
+        Name = "RequireSecuritySignature"; # Microsoft network client: Digitally sign communications (always)
+        Value = 1
+    },
+    @{
+        KeyPath = "HKLM:\SYSTEM\CurrentControlSet\Services\LanmanWorkstation\Parameters";
+        Name = "EnableSecuritySignature"; # Microsoft network client: Digitally sign communications (if server agrees)
+        Value = 1
+    },
+    @{
+        KeyPath = "HKLM:\SYSTEM\CurrentControlSet\Services\LanmanServer\Parameters";
+        Name = "RequireSecuritySignature"; # Microsoft network server: Digitally sign communications (always)
+        Value = 1
+    },
+    @{
+        KeyPath = "HKLM:\SYSTEM\CurrentControlSet\Services\LanmanServer\Parameters";
+        Name = "EnableSecuritySignature"; # Microsoft network server: Digitally sign communications (if client agrees)
+        Value = 1
+    },
+    @{
+        KeyPath = "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System";
+        Name = "DontDisplayLastUserName"; # Interactive logon: Don't display last signed-in
+        Value = 1
+    },
+    @{
+        KeyPath = "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System";
+        Name = "InactivityTimeoutSecs"; # Interactive logon: Machine inactivity limit
+        Value = 900
+    },
+    @{
+        KeyPath = "HKLM:\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Winlogon";
+        Name = "CachedLogonsCount"; # Interactive logon: Number of previous logons to cache
+        Value = 4
+    },
+    @{
+        KeyPath = "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System";
+        Name = "PromptPasswordExpiry"; # Interactive logon: Prompt user to change password before expiration
+        Value = 5
+    },
+    @{
+        KeyPath = "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System";
+        Name = "ForceUnlockLogon"; # Interactive logon: Require Domain Controller Authentication to unlock workstation
+        Value = 1
+    },
+    @{
+        KeyPath = "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System";
+        Name = "ScRemoveOption"; # Interactive logon: Smart card removal behavior
+        Value = 1 # Lock workstation
+    },
+    @{
+        KeyPath = "HKLM:\SYSTEM\CurrentControlSet\Services\LanmanWorkstation\Parameters";
+        Name = "RequireSecuritySignature"; # Microsoft network client: Digitally sign communications (always)
+        Value = 1
+    },
+    @{
+        KeyPath = "HKLM:\SYSTEM\CurrentControlSet\Services\LanmanWorkstation\Parameters";
+        Name = "EnableSecuritySignature"; # Microsoft network client: Digitally sign communications (if server agrees)
+        Value = 1
+    },
+    @{
+        KeyPath = "HKLM:\SYSTEM\CurrentControlSet\Services\LanmanWorkstation\Parameters";
+        Name = "EnablePlainTextPassword"; # Microsoft network client: Send unencrypted password to third-party SMB servers
+        Value = 0
+    },
+    @{
+        KeyPath = "HKLM:\SYSTEM\CurrentControlSet\Services\LanmanServer\Parameters";
+        Name = "AutoDisconnect"; # Microsoft network server: Amount of idle time required before suspending session
+        Value = 15
     }
 )
+
 
 # Apply Settings
 foreach ($Setting in $Settings) {
