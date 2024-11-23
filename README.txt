@@ -1,6 +1,7 @@
 README
 Automated cyberpat script 
-TODO: 
+
+Windows TODO: 
 Disable weak services, 
 enable auto updates, 
 disable remote desktop, 
