@@ -1,10 +1,10 @@
 <#TODO: 
 Disable weak services, 
-enable auto updates, 
+
 disable remote desktop, 
 malwarebytes spot check, 
 system integrity scan, 
-enable firewall, 
+
 check file and folder owner permissions
 #>
 
@@ -486,4 +486,22 @@ foreach ($Setting in $Settings) {
 
 # Confirm changes
 Write-Output "All Security Options applied successfully!"
+
+#enabling automatic updates
+if(Get-Module -ListAvailable -Name PSWindowsUpdate){
+    Write-Output "module exists, enabling update settings"
+}
+else{
+    Install-Module -Name PSWindowsUpdate
+}
+Set-WindowsUpdateAutomaticDownload -Automatic 
+
+
+#enable firewall
+Set-NetFirewallProfile -All -Enabled True 
+$RemoteAssistanceFirewallRules = Get-NetFirewallRule | Where-Object {$_.DisplayName -like "*Remote Assistance*"}
+foreach ($rule in $RemoteAssistanceFirewallRules){
+    Disable-NetFirewallRule -Name $rule.Name
+}
+Write-Output "Remote assistance firewall rules disabled"
 
