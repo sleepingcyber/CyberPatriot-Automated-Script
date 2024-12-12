@@ -493,11 +493,16 @@ Write-Output "All Security Options applied successfully!"
 
 #enable firewall
 Set-NetFirewallProfile -All -Enabled True 
+Write-Output "Firewall enabled"
 $RemoteAssistanceFirewallRules = Get-NetFirewallRule | Where-Object {$_.DisplayName -like "*Remote Assistance*"}
 foreach ($rule in $RemoteAssistanceFirewallRules){
     Disable-NetFirewallRule -Name $rule.Name
 }
 Write-Output "Remote assistance firewall rules disabled"
+$telnetRules = Get-NetFirewallRule | Where-Object {$_.DisplayGroup -like "*telnet*"}
+foreach ($rule in $telnetRules){
+    Disable-NetFirewallRule -Name $rule.Name
+}
 
 
 #enabling automatic updates
@@ -522,7 +527,7 @@ if($UpdateList.Count -eq 0){
     Get-WUInstall -AcceptAll -MicrosoftUpdate -IgnoreReboot -WithHidden -Download -Install | Out-File -FilePath $logPath
 }
 
-
+Disable-WindowsOptionalFeature -Online -FeatureName TelnetClient
 
 
 
