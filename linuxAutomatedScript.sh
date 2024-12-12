@@ -48,10 +48,10 @@ apply_security_settings() {
 
     # Password policies
     echo "Setting password policies..." | tee -a "$LOG_PATH"
-    echo "PASS_MAX_DAYS   90" >> /etc/login.defs
-    echo "PASS_MIN_DAYS   5" >> /etc/login.defs
-    echo "PASS_MIN_LEN    8" >> /etc/login.defs
-    echo "PASS_WARN_AGE   7" >> /etc/login.defs
+    sudo echo "PASS_MAX_DAYS   90" >> /etc/login.defs
+    sudo echo "PASS_MIN_DAYS   5" >> /etc/login.defs
+    sudo echo "PASS_MIN_LEN    8" >> /etc/login.defs
+    sudo echo "PASS_WARN_AGE   7" >> /etc/login.defs
 
     # Lockout policy (requires PAM modifications)
     echo "Editing PAM configurations for lockout policies..." | tee -a "$LOG_PATH"
