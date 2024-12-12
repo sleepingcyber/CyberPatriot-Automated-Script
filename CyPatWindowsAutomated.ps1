@@ -8,6 +8,10 @@ system integrity scan,
 check file and folder owner permissions
 #>
 
+$CompName = $env:COMPUTERNAME
+$CurrentUsr = $Env:UserName
+$logPath = "C:\Users\$CurrentUsr\Documents\update-log-$CompName-$(get-date -Format yyyy-MM-dd).txt"
+
 #from:https://stackoverflow.com/questions/55774478/enforce-password-complexity-on-windows-using-powershell
 #https://www.youtube.com/watch?v=iIIGhS3oAs0
 Function Parse-SecPol($CfgFile){ 
@@ -487,16 +491,6 @@ foreach ($Setting in $Settings) {
 # Confirm changes
 Write-Output "All Security Options applied successfully!"
 
-#enabling automatic updates
-if(Get-Module -ListAvailable -Name PSWindowsUpdate){
-    Write-Output "module exists, enabling update settings"
-}
-else{
-    Install-Module -Name PSWindowsUpdate
-}
-Set-WindowsUpdateAutomaticDownload -Automatic 
-
-
 #enable firewall
 Set-NetFirewallProfile -All -Enabled True 
 $RemoteAssistanceFirewallRules = Get-NetFirewallRule | Where-Object {$_.DisplayName -like "*Remote Assistance*"}
@@ -504,4 +498,31 @@ foreach ($rule in $RemoteAssistanceFirewallRules){
     Disable-NetFirewallRule -Name $rule.Name
 }
 Write-Output "Remote assistance firewall rules disabled"
+
+
+#enabling automatic updates
+if(Get-Module -ListAvailable -Name PSWindowsUpdate){
+    Write-Output "module exists, enabling update settings"
+}
+else{
+    Install-Module -Name PSWindowsUpdate
+}
+Import-Module PSWindowsUpdate
+$UpdateList = @()
+$MyOS = (Get-CimInstance Win32_OperatingSystem).ProductType
+if($MyOS -gt 1){
+    $UpdateList+= Get-WUList -NotCategory "Drivers" -Category "Security Updates", "Critical Updates", "Definition Updates" -MicrosoftUpdate -MicrosoftUpdate
+} else{
+    $UpdateList+= Get-WUList -Category "Security Updates", "Critical Updates", "Definition Updates" -MicrosoftUpdate
+}
+
+if($UpdateList.Count -eq 0){
+    Write-Output "no updates"
+}else {
+    Get-WUInstall -AcceptAll -MicrosoftUpdate -IgnoreReboot -WithHidden -Download -Install | Out-File -FilePath $logPath
+}
+
+
+
+
 
